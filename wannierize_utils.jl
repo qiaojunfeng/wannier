@@ -1,3 +1,4 @@
+using Dates
 mutable struct WannierParameters
     N1::Int
     N2::Int
@@ -47,7 +48,7 @@ function read_system(filename, read_amn=true,read_eig=true)
 	line = lowercase(line) # handle case insensitive win files (relic of Fortran)
         line = replace(line, "="=>" ")
         line = replace(line, ":"=>" ")
-        if(startswith(line,"!"))
+        if(startswith(line,"!") | startswith(line,"#"))
             continue
         elseif occursin("mp_grid",line) #occursin(line,"mp_grid")
             N1,N2,N3 = Base.map(x -> parse(Int,x), split(line)[2:4])
@@ -284,7 +285,7 @@ function powm(A,p)
     return V*Diagonal(d.^p)*V'
 end
 
-# Normalize a matrix A to be unitary. If X is a matrix with orthogonal columns and A a non-singular matrix, then Lšwdin-orthogonalizing X*A is equivalent to computing X*normalize_matrix(A)
+# Normalize a matrix A to be unitary. If X is a matrix with orthogonal columns and A a non-singular matrix, then Lowdin-orthogonalizing X*A is equivalent to computing X*normalize_matrix(A)
 function normalize_matrix(A)
     U,S,V = svd(A)
     accuracy = norm(U*Diagonal(S)*V'-A)

@@ -107,6 +107,7 @@ function choosePole(columns, matrixPath, t, previousPoles)
     m = 1
     maxDist = 0.
     maxPole = pole
+    print("diam = $diam")
 
     # If the diameter of the path on the sphere is too big,
     # try a list of cardinal points as poles.

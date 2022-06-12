@@ -141,7 +141,8 @@ function make_wannier(p,method)
     dV = eigen(Obs)
     d = dV.values
     V = dV.vectors
-    logd = imag(log.(d))
+    # logd = imag(log.(d))
+    logd = log.(d)
     #println("Obstruction matrix  - Id = $(norm(Obs-I)))")
 
     # Hack to avoid separating eigenvalues at -1. TODO understand that

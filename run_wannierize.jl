@@ -59,3 +59,5 @@ p, interp = make_wannier(p,method)
 close("all")
 plot_results(p,interp)
 print_error(p)
+
+write_amn(p, p.A, "$(p.filename).optimized")
